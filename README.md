@@ -1,9 +1,9 @@
 # Payara Issue #5594
-This is an example repository for Payara issue [#5549](https://github.com/payara/Payara/issues/5594). It defines a custom readiness check via a CDI extension. At application runtime, the CDI bean can be injected but is not included in the `GET /health`  or `GET /health/ready` APIs.
+This is an example repository for Payara issue [#5549](https://github.com/payara/Payara/issues/5594). It defines a MicroProfile Health readiness check via a CDI extension. At runtime, the synthetic `HealthCheck` bean can be injected but is not included in the health check APIs.
 
 # Noteworthy Files
-* `CdiExtension.java` adds a custom readiness check using the `AfterBeanDiscovery` event.
-* `RestApi.java` defines an API that provides a list of all readiness check names.
+* `CdiExtension.java` - defines a readiness check using CDI portable extensions
+* `BeansApi.java` - defines an API listing all `HealthCheck` beans
 
 # Running Project
 This project can be run with the Payara Maven plugin.
@@ -12,16 +12,12 @@ mvn clean package payara-micro:start
 ```
 
 # Testing
-Two APIs are exposed.
-1. `GET /health` is provided by Payara.
-1. `GET /health-checks/readiness` is provided by this application. It includes a name for every injectable readiness check.
+These two APIs should be compared:
+1. `GET /health` - MicroProfile Health API
+1. `GET /beans/health-checks` Application API listing all `HealthCheck` beans
 
 ## Actual Behavior
-In Payara 5.2021.10, `GET /health` does not include the custom health check. However `GET /health-checks/readiness` is able to find the custom health check as a CDI bean with the readiness qualifier.
+In Payara 6.2023.6, the API `GET /health` does not include any health checks defined as synthetic beans.
 
 ## Expected Behavior
-The `GET /health` API should include the custom health check.
-
-
-
-
+The `GET /health` API should include any health check bean (synthetic or otherwise)
