@@ -1,5 +1,5 @@
-# Payara Issue #5594
-This is an example repository for Payara issue [#5549](https://github.com/payara/Payara/issues/5594). It defines a MicroProfile Health readiness check via a CDI extension. At runtime, the synthetic `HealthCheck` bean can be injected but is not included in the health check APIs.
+# Payara Issue #5594 / #6314
+This is an example repository for Payara issue [#6314](https://github.com/payara/Payara/issues/6314) (previously [#5549](https://github.com/payara/Payara/issues/5594)). It defines a MicroProfile Health readiness check via a CDI extension. At runtime, the synthetic `HealthCheck` bean can be injected but is not included in the health check APIs.
 
 # Noteworthy Files
 * `CdiExtension.java` - defines a readiness check using CDI portable extensions
