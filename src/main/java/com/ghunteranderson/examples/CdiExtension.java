@@ -3,7 +3,6 @@ package com.ghunteranderson.examples;
 import java.lang.annotation.Annotation;
 
 import org.eclipse.microprofile.health.HealthCheck;
-import org.eclipse.microprofile.health.HealthCheckResponse;
 import org.eclipse.microprofile.health.Readiness;
 
 import jakarta.enterprise.context.ApplicationScoped;
@@ -22,7 +21,7 @@ public class CdiExtension implements Extension {
       .qualifiers(new ReadinessAnnotation())
       .scope(ApplicationScoped.class)
       .produceWith(obj -> {
-        return new CustomHealthCheck("Custom-Health-Check");
+        return new GenericHealthCheck("Synthetic Health Check");
       });
   }
 
@@ -30,20 +29,6 @@ public class CdiExtension implements Extension {
     @Override
     public Class<? extends Annotation> annotationType() {
       return Readiness.class;
-    }
-  }
-
-  public static class CustomHealthCheck implements HealthCheck {
-
-    private String name;
-
-    public CustomHealthCheck(String name){
-      this.name = name;
-    }
-
-    @Override
-    public HealthCheckResponse call() {
-      return HealthCheckResponse.up(name);
     }
   }
 

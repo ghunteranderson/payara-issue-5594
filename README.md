@@ -3,6 +3,8 @@ This is an example repository for Payara issue [#6314](https://github.com/payara
 
 # Noteworthy Files
 * `CdiExtension.java` - defines a readiness check using CDI portable extensions
+* `AnnotatedClassHealthCheck.java` - defines a readiness check using an annotated class
+* `AnnotatedProducerHealthCheck.java` - defines readiness checks using field and method producers
 * `BeansApi.java` - defines an API listing all `HealthCheck` beans
 
 # Running Project
